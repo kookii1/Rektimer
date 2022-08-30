@@ -136,7 +136,7 @@ namespace Rektimer
 
         private void loadRem_Click(object sender, EventArgs e)
         {
-            if(nLoadCounter >= 1) {
+            if(nLoadCounter <= 1) {
                 MessageBox.Show("No Loads to remove.");
                 return; 
             }
