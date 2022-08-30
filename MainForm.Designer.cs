@@ -41,6 +41,7 @@
             this.vFPS = new System.Windows.Forms.TextBox();
             this.loadAdd = new System.Windows.Forms.Button();
             this.loadCounter = new System.Windows.Forms.Label();
+            this.loadRem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,6 +128,7 @@
             this.fStart.Name = "fStart";
             this.fStart.Size = new System.Drawing.Size(84, 20);
             this.fStart.TabIndex = 5;
+            this.fStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.allowDigitsOnly);
             // 
             // fEnd
             // 
@@ -134,6 +136,7 @@
             this.fEnd.Name = "fEnd";
             this.fEnd.Size = new System.Drawing.Size(98, 20);
             this.fEnd.TabIndex = 6;
+            this.fEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.allowDigitsOnly);
             // 
             // vFPS
             // 
@@ -141,6 +144,7 @@
             this.vFPS.Name = "vFPS";
             this.vFPS.Size = new System.Drawing.Size(99, 20);
             this.vFPS.TabIndex = 7;
+            this.vFPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.allowDigitsOnly);
             // 
             // loadAdd
             // 
@@ -165,12 +169,24 @@
             this.loadCounter.TabIndex = 8;
             this.loadCounter.Text = "Load Counter: 0";
             // 
-            // Form1
+            // loadRem
+            // 
+            this.loadRem.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadRem.Location = new System.Drawing.Point(138, 45);
+            this.loadRem.Name = "loadRem";
+            this.loadRem.Size = new System.Drawing.Size(125, 37);
+            this.loadRem.TabIndex = 9;
+            this.loadRem.Text = "Remove Load";
+            this.loadRem.UseVisualStyleBackColor = true;
+            this.loadRem.Click += new System.EventHandler(this.loadRem_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(519, 319);
+            this.Controls.Add(this.loadRem);
             this.Controls.Add(this.loadCounter);
             this.Controls.Add(this.loadAdd);
             this.Controls.Add(this.vFPS);
@@ -184,7 +200,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rektimer";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
@@ -209,6 +225,7 @@
         private System.Windows.Forms.Label loadCounter;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button loadRem;
     }
 }
 

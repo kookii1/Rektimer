@@ -3,9 +3,9 @@ D:\Henrique\Projetos\Rektimer\Rektimer\bin\Release\Rektimer.exe
 D:\Henrique\Projetos\Rektimer\Rektimer\bin\Release\Rektimer.pdb
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.csproj.AssemblyReference.cache
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.csproj.SuggestedBindingRedirects.cache
-D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.Form1.resources
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.Properties.Resources.resources
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.csproj.GenerateResource.cache
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.csproj.CoreCompileInputs.cache
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.exe
 D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.pdb
+D:\Henrique\Projetos\Rektimer\Rektimer\obj\Release\Rektimer.MainForm.resources
