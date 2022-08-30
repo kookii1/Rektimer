@@ -2,3 +2,7 @@
 *.pdb
 *.pdb
 *.pdb
+*.pdb
+obj/Release/Rektimer.pdb
+*.cache
+obj/Release/Rektimer.csproj.AssemblyReference.cache

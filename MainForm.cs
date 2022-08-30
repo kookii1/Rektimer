@@ -136,10 +136,15 @@ namespace Rektimer
 
         private void loadRem_Click(object sender, EventArgs e)
         {
+            if(nLoadCounter >= 1) {
+                MessageBox.Show("No Loads to remove.");
+                return; 
+            }
+
             // Remove a load from the counter
 
             panel1.Controls.Remove(startLoadTextBox[nLoadCounter - 1] as TextBox);
-            panel1.Controls.Add(endLoadTextBox[nLoadCounter - 1] as TextBox);
+            panel1.Controls.Remove(endLoadTextBox[nLoadCounter - 1] as TextBox);
 
             startLoadTextBox[nLoadCounter - 1] = null;
             endLoadTextBox[nLoadCounter - 1] = null;
