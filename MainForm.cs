@@ -57,9 +57,9 @@ namespace Rektimer
 
             float framerate = float.Parse(vFPS.Text), start = float.Parse(fStart.Text), end = float.Parse(fEnd.Text), totalLoadFrames = 0; // Get information from the input
 
-            if(end >= start)
+            if(end <= start)
             {
-                MessageBox.Show("End frame cannot be bigger or equal to start frame.\nPlease check your input then try again.");
+                MessageBox.Show("End frame cannot be smaller or equal to start frame.\nPlease check your input then try again.");
                 return; 
             }
 
