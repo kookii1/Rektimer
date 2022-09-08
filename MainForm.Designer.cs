@@ -62,9 +62,9 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Location = new System.Drawing.Point(12, 94);
+            this.panel1.Location = new System.Drawing.Point(15, 94);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(495, 123);
+            this.panel1.Size = new System.Drawing.Size(492, 123);
             this.panel1.TabIndex = 1;
             // 
             // label5
@@ -126,6 +126,7 @@
             // 
             this.fStart.Location = new System.Drawing.Point(83, 12);
             this.fStart.Name = "fStart";
+            this.fStart.ShortcutsEnabled = false;
             this.fStart.Size = new System.Drawing.Size(84, 20);
             this.fStart.TabIndex = 5;
             this.fStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.allowDigitsOnly);
@@ -134,6 +135,7 @@
             // 
             this.fEnd.Location = new System.Drawing.Point(240, 12);
             this.fEnd.Name = "fEnd";
+            this.fEnd.ShortcutsEnabled = false;
             this.fEnd.Size = new System.Drawing.Size(98, 20);
             this.fEnd.TabIndex = 6;
             this.fEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.allowDigitsOnly);
@@ -142,6 +144,7 @@
             // 
             this.vFPS.Location = new System.Drawing.Point(408, 12);
             this.vFPS.Name = "vFPS";
+            this.vFPS.ShortcutsEnabled = false;
             this.vFPS.Size = new System.Drawing.Size(99, 20);
             this.vFPS.TabIndex = 7;
             this.vFPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.allowDigitsOnly);
