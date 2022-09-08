@@ -6,3 +6,4 @@
 obj/Release/Rektimer.pdb
 *.cache
 obj/Release/Rektimer.csproj.AssemblyReference.cache
+*.txt
