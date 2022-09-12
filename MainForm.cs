@@ -69,9 +69,12 @@ namespace Rektimer
                 return; // Throw error if any of the text boxes is empty
             }
 
+
             float framerate = float.Parse(vFPS.Text), 
                 start = float.Parse(fStart.Text), 
                 end = float.Parse(fEnd.Text), totalLoadFrames = 0; // Get information from the input
+            bool hasLoads = false;
+
 
             if(end <= start)
             {
@@ -79,6 +82,7 @@ namespace Rektimer
                     "\nPlease check your input then try again.");
                 return; 
             }
+
 
             timeWithLoads = (end - start) / framerate; // Epic calculation
 
@@ -94,15 +98,40 @@ namespace Rektimer
                 loadEnd = int.Parse(endLoadTextBox[i].Text);
 
                 totalLoadFrames += (loadEnd - loadStart); // Get all the loads and calculate to get the number of frames of each load
+                hasLoads = true;
             }
 
             timeWithoutLoads = ((end - start) - totalLoadFrames) / framerate; // More epic calculation
 
+
             TimeSpan tSpanLoads = TimeSpan.FromSeconds(timeWithLoads), tSpanNoLoads = TimeSpan.FromSeconds(timeWithoutLoads);
+            string tLoads = tSpanLoads.ToString(), tNoLoads = tSpanNoLoads.ToString(), endingMessage = "";
 
-            string tLoads = tSpanLoads.ToString(), tNoLoads = tSpanNoLoads.ToString();
+            if(tLoads.Contains("."))
+            {
+                tLoads = tLoads.Substring(0, tLoads.Length - 4);
+            }
+            if (tNoLoads.Contains("."))
+            {
+                tNoLoads = tNoLoads.Substring(0, tNoLoads.Length - 4);
+            }
 
-            string endingMessage = "Time with loads: " + tLoads + "\nTime without loads: " + tNoLoads;
+            /*while ((char)tLoads[0] == '0' || (char)tLoads[0] == ':')
+            {
+                tLoads = tLoads.Remove(0, 1);
+            }
+            while ((char)tNoLoads[0] == '0' || (char)tNoLoads[0] == ':')
+            {
+                tNoLoads = tNoLoads.Remove(0, 1);
+            }*/
+            
+
+            if (hasLoads)
+            {
+                endingMessage = "Time with loads: " + tLoads + "\n";
+            }
+
+            endingMessage += "Time without loads: " + tNoLoads + "\nRetimed with Rektimer https://github.com/rekkto/Rektimer";
             Clipboard.SetText(endingMessage); // Copy text to the clipboard
             MessageBox.Show(endingMessage + "\nThis message was copied to the clipboard");
         }
