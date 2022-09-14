@@ -9,56 +9,31 @@ namespace Rektimer
         int nLoadCounter = 0;
         string loadCounterTextBase = "Load Counter: ";
         Color backColor = ColorTranslator.FromHtml("#A5C9CA");
+        bool hasLoads = false;
+
 
         TextBox[] startLoadTextBox = {}; TextBox[] endLoadTextBox = { };
 
         float timeWithLoads = 0F, timeWithoutLoads = 0F;
 
-        public MainForm()
+        string formatTime(float timeWithLoads, float timeWithoutLoads)
         {
-            InitializeComponent();
-            applyTheme(); // Apply theme to controls
+            string endTime = "";
 
-            Array.Resize(ref startLoadTextBox, 64);
-            Array.Resize(ref endLoadTextBox, 64); // Resize the arrays to support multiple loads
+            TimeSpan tSpanLoads = TimeSpan.FromSeconds(timeWithLoads), 
+                tSpanNoLoads = TimeSpan.FromSeconds(timeWithoutLoads); // Format float into a timestamp
+            string tLoads = tSpanLoads.ToString(), tNoLoads = tSpanNoLoads.ToString(); // Convert timestamp into string
 
-            fStart.ContextMenu = null;
-            fEnd.ContextMenu = null;
-            vFPS.ContextMenu = null; // Disables context menu on all the text boxes so pasting letters is impossible
-        }
+            if (tLoads.Contains(".")) tLoads = tLoads.Substring(0, tLoads.Length - 4); // Remove useless zeroes in milliseconds
+            if (tNoLoads.Contains(".")) tNoLoads = tNoLoads.Substring(0, tNoLoads.Length - 4);
 
-        private void loadAdd_Click(object sender, EventArgs e)
-        {
-            // Create the load start and end text boxes and add them to an array
+            if (modNoteCheck.Checked) endTime += "Mod note:\n";
 
-            TextBox txtloadStart = new TextBox();
-            TextBox txtloadEnd = new TextBox();
+            if (hasLoads) endTime += "Time with loads: " + tLoads + "\n";
 
-            txtloadStart.Name = "loadStart" + nLoadCounter; // Set text box name for identification
-            txtloadStart.BackColor = backColor;
-            txtloadStart.SetBounds((nLoadCounter + 1) * 120, 25, 110, 20); // Set theme and position
+            endTime += "Time without loads: " + tNoLoads + "\nRetimed with Rektimer https://github.com/rekkto/Rektimer";
 
-            txtloadStart.ContextMenu = null; // Disables copy and pasting
-            txtloadStart.ShortcutsEnabled = false;
-
-
-            txtloadEnd.Name = "loadEnd" + nLoadCounter;
-            txtloadEnd.BackColor = backColor;
-            txtloadEnd.SetBounds((nLoadCounter + 1) * 120, 70, 110, 20);
-
-            txtloadEnd.ContextMenu = null;
-            txtloadEnd.ShortcutsEnabled = false;
-
-            txtloadStart.KeyPress += allowDigitsOnly;
-            txtloadEnd.KeyPress += allowDigitsOnly; // Disables the option to insert letters or special characters
-            startLoadTextBox[nLoadCounter] = txtloadStart;
-            endLoadTextBox[nLoadCounter] = txtloadEnd;
-
-            panel1.Controls.Add(txtloadStart as TextBox);
-            panel1.Controls.Add(txtloadEnd as TextBox); // Add controls to panel
-
-            nLoadCounter++;
-            loadCounter.Text = loadCounterTextBase + (nLoadCounter);
+            return endTime;
         }
 
         private void retimeBtn_Click(object sender, EventArgs e)
@@ -69,12 +44,9 @@ namespace Rektimer
                 return; // Throw error if any of the text boxes is empty
             }
 
-
             float framerate = float.Parse(vFPS.Text), 
                 start = float.Parse(fStart.Text), 
                 end = float.Parse(fEnd.Text), totalLoadFrames = 0; // Get information from the input
-            bool hasLoads = false;
-
 
             if(end <= start)
             {
@@ -82,7 +54,6 @@ namespace Rektimer
                     "\nPlease check your input then try again.");
                 return; 
             }
-
 
             timeWithLoads = (end - start) / framerate; // Epic calculation
 
@@ -97,43 +68,42 @@ namespace Rektimer
                 int loadStart = int.Parse(startLoadTextBox[i].Text),
                 loadEnd = int.Parse(endLoadTextBox[i].Text);
 
+                if(loadEnd >= loadStart || loadEnd >= start)
+                {
+                    MessageBox.Show("Load end frames cannot be smaller or equal to either\nRun frame start or load frame start");
+                    return;
+                }
+
                 totalLoadFrames += (loadEnd - loadStart); // Get all the loads and calculate to get the number of frames of each load
                 hasLoads = true;
             }
-
             timeWithoutLoads = ((end - start) - totalLoadFrames) / framerate; // More epic calculation
 
+            string msg = formatTime(timeWithLoads, timeWithoutLoads);
 
-            TimeSpan tSpanLoads = TimeSpan.FromSeconds(timeWithLoads), tSpanNoLoads = TimeSpan.FromSeconds(timeWithoutLoads);
-            string tLoads = tSpanLoads.ToString(), tNoLoads = tSpanNoLoads.ToString(), endingMessage = "";
+            Clipboard.SetText(msg); // Copy text to the clipboard
 
-            if(tLoads.Contains("."))
-            {
-                tLoads = tLoads.Substring(0, tLoads.Length - 4);
-            }
-            if (tNoLoads.Contains("."))
-            {
-                tNoLoads = tNoLoads.Substring(0, tNoLoads.Length - 4);
-            }
+            MessageBox.Show(msg + "\nThis message was copied to the clipboard");
+        }
 
-            /*while ((char)tLoads[0] == '0' || (char)tLoads[0] == ':')
-            {
-                tLoads = tLoads.Remove(0, 1);
-            }
-            while ((char)tNoLoads[0] == '0' || (char)tNoLoads[0] == ':')
-            {
-                tNoLoads = tNoLoads.Remove(0, 1);
-            }*/
-            
+        private void loadAdd_Click(object sender, EventArgs e)
+        {
+            // Create the load start and end text boxes and add them to an array
 
-            if (hasLoads)
-            {
-                endingMessage = "Time with loads: " + tLoads + "\n";
-            }
+            TextBox txtloadStart = new TextBox();
+            TextBox txtloadEnd = new TextBox();
 
-            endingMessage += "Time without loads: " + tNoLoads + "\nRetimed with Rektimer https://github.com/rekkto/Rektimer";
-            Clipboard.SetText(endingMessage); // Copy text to the clipboard
-            MessageBox.Show(endingMessage + "\nThis message was copied to the clipboard");
+            setTextBoxProperties(txtloadStart);
+            setTextBoxProperties(txtloadEnd);
+
+            startLoadTextBox[nLoadCounter] = txtloadStart;
+            endLoadTextBox[nLoadCounter] = txtloadEnd;
+
+            panel1.Controls.Add(txtloadStart as TextBox);
+            panel1.Controls.Add(txtloadEnd as TextBox); // Add controls to panel
+
+            nLoadCounter++;
+            loadCounter.Text = loadCounterTextBase + (nLoadCounter);
         }
 
         private void loadRem_Click(object sender, EventArgs e)
@@ -153,6 +123,30 @@ namespace Rektimer
 
             nLoadCounter--;
             loadCounter.Text = loadCounterTextBase + (nLoadCounter);
+        }
+
+        void setTextBoxProperties(TextBox textBox)
+        {
+            textBox.Name = "loadStart" + nLoadCounter; // Set text box name for identification
+            textBox.BackColor = backColor;
+            textBox.SetBounds((nLoadCounter + 1) * 120, 25, 110, 20); // Set theme and position
+
+            textBox.ContextMenu = null; // Disables copy and pasting
+            textBox.ShortcutsEnabled = false;
+            textBox.KeyPress += allowDigitsOnly;
+        }
+
+        public MainForm()
+        {
+            InitializeComponent();
+            applyTheme(); // Apply theme to controls
+
+            Array.Resize(ref startLoadTextBox, 64);
+            Array.Resize(ref endLoadTextBox, 64); // Resize the arrays to support multiple loads
+
+            fStart.ContextMenu = null;
+            fEnd.ContextMenu = null;
+            vFPS.ContextMenu = null; // Disables context menu on all the text boxes so pasting letters is impossible
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

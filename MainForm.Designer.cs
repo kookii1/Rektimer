@@ -42,6 +42,9 @@
             this.loadAdd = new System.Windows.Forms.Button();
             this.loadCounter = new System.Windows.Forms.Label();
             this.loadRem = new System.Windows.Forms.Button();
+            this.modNoteCheck = new System.Windows.Forms.CheckBox();
+            this.debugInfoCheck = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +52,7 @@
             // 
             this.retimeBtn.FlatAppearance.BorderSize = 0;
             this.retimeBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.retimeBtn.Location = new System.Drawing.Point(176, 240);
+            this.retimeBtn.Location = new System.Drawing.Point(176, 287);
             this.retimeBtn.Name = "retimeBtn";
             this.retimeBtn.Size = new System.Drawing.Size(164, 67);
             this.retimeBtn.TabIndex = 0;
@@ -183,12 +186,52 @@
             this.loadRem.UseVisualStyleBackColor = true;
             this.loadRem.Click += new System.EventHandler(this.loadRem_Click);
             // 
+            // modNoteCheck
+            // 
+            this.modNoteCheck.AutoSize = true;
+            this.modNoteCheck.BackColor = System.Drawing.Color.Transparent;
+            this.modNoteCheck.ForeColor = System.Drawing.Color.White;
+            this.modNoteCheck.Location = new System.Drawing.Point(126, 240);
+            this.modNoteCheck.Name = "modNoteCheck";
+            this.modNoteCheck.Size = new System.Drawing.Size(73, 17);
+            this.modNoteCheck.TabIndex = 10;
+            this.modNoteCheck.Text = "Mod Note";
+            this.modNoteCheck.UseVisualStyleBackColor = false;
+            // 
+            // debugInfoCheck
+            // 
+            this.debugInfoCheck.AutoSize = true;
+            this.debugInfoCheck.BackColor = System.Drawing.Color.Transparent;
+            this.debugInfoCheck.ForeColor = System.Drawing.Color.White;
+            this.debugInfoCheck.Location = new System.Drawing.Point(266, 240);
+            this.debugInfoCheck.Name = "debugInfoCheck";
+            this.debugInfoCheck.Size = new System.Drawing.Size(190, 17);
+            this.debugInfoCheck.TabIndex = 11;
+            this.debugInfoCheck.Text = "Youtube Debug Info (not done yet)";
+            this.debugInfoCheck.UseVisualStyleBackColor = false;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox3.ForeColor = System.Drawing.Color.White;
+            this.checkBox3.Location = new System.Drawing.Point(282, 56);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(80, 17);
+            this.checkBox3.TabIndex = 12;
+            this.checkBox3.Text = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = false;
+            this.checkBox3.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(519, 319);
+            this.ClientSize = new System.Drawing.Size(519, 359);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.debugInfoCheck);
+            this.Controls.Add(this.modNoteCheck);
             this.Controls.Add(this.loadRem);
             this.Controls.Add(this.loadCounter);
             this.Controls.Add(this.loadAdd);
@@ -229,6 +272,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button loadRem;
+        private System.Windows.Forms.CheckBox modNoteCheck;
+        private System.Windows.Forms.CheckBox debugInfoCheck;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
